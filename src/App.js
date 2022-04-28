@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+import logo from './images/logo.svg';
 
 function App() {
   return (
@@ -7,7 +7,7 @@ function App() {
         <div className="page__container">
 
           <header className="header">
-            <img className="logo" src="<%=require('./images/logo.svg')%>" alt="логотип" />
+            <img className="logo" src={logo} alt="логотип" />
           </header>
 
           <main>
