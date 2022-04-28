@@ -16,9 +16,9 @@ function App() {
             <div className="popup__container">
               <form className="popup__form popup__form_sec_profile" method="post" name="formNameStatus">
                 <h2 className="popup__heading">Редактировать профиль</h2>
-                <input className="popup__input popup__input_set_name" type="text" name="name" value="Жак-Ив Кусто" placeholder="Введите имя" minLength="2" maxLength="40" required />
+                <input className="popup__input popup__input_set_name" type="text" name="name" defaultValue="Жак-Ив Кусто" placeholder="Введите имя" minLength="2" maxLength="40" required />
                 <span className="popup__error name-error"></span>
-                <input  className="popup__input popup__input_set_status" type="text" name="status" value="Исследователь океана" placeholder="Введите статус" minLength="2" maxLength="200" required />
+                <input  className="popup__input popup__input_set_status" type="text" name="status" defaultValue="Исследователь океана" placeholder="Введите статус" minLength="2" maxLength="200" required />
                 <span className="popup__error status-error"></span>
                 <button className="popup__submit-button" type="submit">Сохранить</button>
               </form>
@@ -30,7 +30,7 @@ function App() {
             <div className="popup__container">
               <form className="popup__form popup__form_sec_avatar" method="post" name="formNewAvatar" noValidate>
                 <h2 className="popup__heading">Обновить аватар</h2>
-                <input  className="popup__input popup__input_set_avatar" type="url" name="avatarLink" value="" placeholder="Ссылка на аватар" required />
+                <input  className="popup__input popup__input_set_avatar" type="url" name="avatarLink" defaultValue="" placeholder="Ссылка на аватар" required />
                 <span className="popup__error avatarLink-error"></span>
                 <button className="popup__submit-button popup__submit-button_type_save" type="submit">Сохранить</button>
               </form>
@@ -42,9 +42,9 @@ function App() {
             <div className="popup__container">
               <form className="popup__form popup__form_sec_new" method="post" name="formNewItem" noValidate>
                 <h2 className="popup__heading">Новое место</h2>
-                <input className="popup__input popup__input_set_place" type="text" name="place" value="" placeholder="Название" minLength="2" maxLength="30" required />
+                <input className="popup__input popup__input_set_place" type="text" name="place" defaultValue="" placeholder="Название" minLength="2" maxLength="30" required />
                 <span className="popup__error place-error"></span>
-                <input  className="popup__input popup__input_set_link" type="url" name="link" value="" placeholder="Ссылка на картинку" required />
+                <input  className="popup__input popup__input_set_link" type="url" name="link" defaultValue="" placeholder="Ссылка на картинку" required />
                 <span className="popup__error link-error"></span>
                 <button className="popup__submit-button popup__submit-button_type_create" type="submit">Создать</button>
               </form>
