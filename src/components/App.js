@@ -1,4 +1,6 @@
-import logo from './images/logo.svg';
+import Header from './Header';
+import Main from './Main';
+import Footer from './Footer';
 
 function App() {
   return (
@@ -6,39 +8,17 @@ function App() {
       <div className="page">
         <div className="page__container">
 
-          <header className="header">
-            <img className="logo" src={logo} alt="логотип" />
-          </header>
-
-          <main>
-
-            <section className="profile">
-              <div className="profile__avatar"></div>
-              <div className="profile__info">
-                <h1 className="profile__info-title">Кусто</h1>
-                <button className="profile__info-edit-button" type="button"></button>
-                <p className="profile__info-status">Иследователь</p>
-              </div>
-              <button className="profile__button" type="button"></button>
-            </section>
-
-
-            <section className="elements">
-
-            </section>
-          </main>
-
-          <footer className="footer">
-            <p className="footer__copyright">© 2021 Mesto Russia</p>
-          </footer>
+          <Header />
+          <Main />
+          <Footer />
 
           <section className="popup popup_sec_profile">
             <div className="popup__container">
               <form className="popup__form popup__form_sec_profile" method="post" name="formNameStatus">
                 <h2 className="popup__heading">Редактировать профиль</h2>
-                <input className="popup__input popup__input_set_name" type="text" name="name" value="Жак-Ив Кусто" placeholder="Введите имя" minlength="2" maxlength="40" required />
+                <input className="popup__input popup__input_set_name" type="text" name="name" value="Жак-Ив Кусто" placeholder="Введите имя" minLength="2" maxLength="40" required />
                 <span className="popup__error name-error"></span>
-                <input  className="popup__input popup__input_set_status" type="text" name="status" value="Исследователь океана" placeholder="Введите статус" minlength="2" maxlength="200" required />
+                <input  className="popup__input popup__input_set_status" type="text" name="status" value="Исследователь океана" placeholder="Введите статус" minLength="2" maxLength="200" required />
                 <span className="popup__error status-error"></span>
                 <button className="popup__submit-button" type="submit">Сохранить</button>
               </form>
@@ -48,7 +28,7 @@ function App() {
 
           <section className="popup popup_sec_avatar">
             <div className="popup__container">
-              <form className="popup__form popup__form_sec_avatar" method="post" name="formNewAvatar" novalidate>
+              <form className="popup__form popup__form_sec_avatar" method="post" name="formNewAvatar" noValidate>
                 <h2 className="popup__heading">Обновить аватар</h2>
                 <input  className="popup__input popup__input_set_avatar" type="url" name="avatarLink" value="" placeholder="Ссылка на аватар" required />
                 <span className="popup__error avatarLink-error"></span>
@@ -60,9 +40,9 @@ function App() {
 
           <section className="popup popup_sec_new">
             <div className="popup__container">
-              <form className="popup__form popup__form_sec_new" method="post" name="formNewItem" novalidate>
+              <form className="popup__form popup__form_sec_new" method="post" name="formNewItem" noValidate>
                 <h2 className="popup__heading">Новое место</h2>
-                <input className="popup__input popup__input_set_place" type="text" name="place" value="" placeholder="Название" minlength="2" maxlength="30" required />
+                <input className="popup__input popup__input_set_place" type="text" name="place" value="" placeholder="Название" minLength="2" maxLength="30" required />
                 <span className="popup__error place-error"></span>
                 <input  className="popup__input popup__input_set_link" type="url" name="link" value="" placeholder="Ссылка на картинку" required />
                 <span className="popup__error link-error"></span>
@@ -74,7 +54,7 @@ function App() {
 
           <section className="popup popup_sec_remove-confirm">
             <div className="popup__container">
-              <form className="popup__form popup__form_sec_remove-confirm" method="post" name="formRemoveConfirm" novalidate>
+              <form className="popup__form popup__form_sec_remove-confirm" method="post" name="formRemoveConfirm" noValidate>
                 <h2 className="popup__heading">Вы уверены?</h2>
                 <button className="popup__submit-button popup__submit-button_sec_remove-confirm" type="submit">Да</button>
               </form>
