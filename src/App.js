@@ -1,5 +1,4 @@
 import logo from './logo.svg';
-import './App.css';
 
 function App() {
   return (
@@ -16,9 +15,9 @@ function App() {
             <section className="profile">
               <div className="profile__avatar"></div>
               <div className="profile__info">
-                <h1 className="profile__info-title"></h1>
+                <h1 className="profile__info-title">Кусто</h1>
                 <button className="profile__info-edit-button" type="button"></button>
-                <p className="profile__info-status"></p>
+                <p className="profile__info-status">Иследователь</p>
               </div>
               <button className="profile__button" type="button"></button>
             </section>
