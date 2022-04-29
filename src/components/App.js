@@ -11,10 +11,21 @@ import ImagePopup from './ImagePopup';
 function App() {
 
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+
 
   function handleEditProfileClick () {
-    setIsEditProfilePopupOpen(true)
+    setIsEditProfilePopupOpen(true);
   };
+
+  function handleEditAvatarClick () {
+    setIsEditAvatarPopupOpen(true);
+  };
+  function handleAddPlaceClick () {
+    setIsAddPlacePopupOpen(true);
+  };
+
   // function handleEditProfileClick () {
   //   console.log('hi');
   //   const popupProfile = document.querySelector('.popup_sec_profile');
@@ -23,6 +34,8 @@ function App() {
 
   function closeAllPopups() {
     setIsEditProfilePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+    setIsAddPlacePopupOpen(false);
   }
 
   return (
@@ -31,9 +44,11 @@ function App() {
         <div className="page__container">
 
           <Header />
-          <Main onEditProfile={handleEditProfileClick}/>
+          <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick}/>
           <Footer />
           <PopupWithForm name="profile" title="Редактировать профиль" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>{<h2 className="popup__heading">hello-mello</h2>}</PopupWithForm>
+          <PopupWithForm name="newPlace" title="Новое место" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>{<h2 className="popup__heading">hello-mello</h2>}</PopupWithForm>
+          <PopupWithForm name="avatar" title="Обновить аватар" isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>{<h2 className="popup__heading">hello-mello</h2>}</PopupWithForm>
 
           {/* <section className="popup popup_sec_profile">
             <div className="popup__container">
@@ -49,7 +64,7 @@ function App() {
             </div>
           </section> */}
 
-          <section className="popup popup_sec_avatar">
+          {/* <section className="popup popup_sec_avatar">
             <div className="popup__container">
               <form className="popup__form popup__form_sec_avatar" method="post" name="formNewAvatar" noValidate>
                 <h2 className="popup__heading">Обновить аватар</h2>
@@ -59,9 +74,9 @@ function App() {
               </form>
               <button className="popup__close-button" type="button"></button>
             </div>
-          </section>
+          </section> */}
 
-          <section className="popup popup_sec_new">
+          {/* <section className="popup popup_sec_new">
             <div className="popup__container">
               <form className="popup__form popup__form_sec_new" method="post" name="formNewItem" noValidate>
                 <h2 className="popup__heading">Новое место</h2>
@@ -73,7 +88,7 @@ function App() {
               </form>
               <button className="popup__close-button" type="button"></button>
             </div>
-          </section>
+          </section> */}
 
           <section className="popup popup_sec_remove-confirm">
             <div className="popup__container">
