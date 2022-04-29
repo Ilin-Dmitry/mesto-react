@@ -1,6 +1,7 @@
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
+import PopupWithForm from './PopupWithForm';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
           <Header />
           <Main />
           <Footer />
+          <PopupWithForm name="profile" title="редактировать" >{<h2 className="popup__heading">hello-mello</h2>}</PopupWithForm>
 
           <section className="popup popup_sec_profile">
             <div className="popup__container">
