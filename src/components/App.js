@@ -1,20 +1,41 @@
+import React from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
+import ImagePopup from './ImagePopup';
+
+
+
 
 function App() {
+
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+
+  function handleEditProfileClick () {
+    setIsEditProfilePopupOpen(true)
+  };
+  // function handleEditProfileClick () {
+  //   console.log('hi');
+  //   const popupProfile = document.querySelector('.popup_sec_profile');
+  //   popupProfile.classList.add('popup_opened');
+  // };
+
+  function closeAllPopups() {
+    setIsEditProfilePopupOpen(false);
+  }
+
   return (
     <div className="App">
       <div className="page">
         <div className="page__container">
 
           <Header />
-          <Main />
+          <Main onEditProfile={handleEditProfileClick}/>
           <Footer />
-          <PopupWithForm name="profile" title="редактировать" >{<h2 className="popup__heading">hello-mello</h2>}</PopupWithForm>
+          <PopupWithForm name="profile" title="Редактировать профиль" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>{<h2 className="popup__heading">hello-mello</h2>}</PopupWithForm>
 
-          <section className="popup popup_sec_profile">
+          {/* <section className="popup popup_sec_profile">
             <div className="popup__container">
               <form className="popup__form popup__form_sec_profile" method="post" name="formNameStatus">
                 <h2 className="popup__heading">Редактировать профиль</h2>
@@ -26,7 +47,7 @@ function App() {
               </form>
               <button className="popup__close-button" type="button"></button>
             </div>
-          </section>
+          </section> */}
 
           <section className="popup popup_sec_avatar">
             <div className="popup__container">
