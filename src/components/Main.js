@@ -1,32 +1,31 @@
 import React from 'react';
 import api from '../utils/Api';
+import Card from './Card';
 
 
 function Main(props) {
-  // function handleEditAvatarClick () {
-  //   const popupChangeAvatar = document.querySelector('.popup_sec_avatar');
-  //   popupChangeAvatar.classList.add('popup_opened');
-  // };
 
-  // function handleAddPlaceClick () {
-  //   const popupNewCard = document.querySelector('.popup_sec_new');
-  //   popupNewCard.classList.add('popup_opened');
-  // };
   const [userName, setUserName] = React.useState('Jacques-Yves Cousteau');
   const [userDescription , setUserDescription ] = React.useState('ocean researcher');
   const [userAvatar, setUserAvatar] = React.useState('https://pressanews.ru/wp-content/uploads/2015/07/Kem-byl-ZHak-Iv-Kusto-i-chem-on-byl-tak-znamenit.jpg');
 
+  const [cards, setCards] = React.useState([]);
+
   React.useEffect(() => {
     api.getProfile()
     .then(res => {
-      console.log(res)
       setUserName(res.name)
       setUserDescription(res.about)
       setUserAvatar(res.avatar)
     })
   }, [])
 
-
+  React.useEffect(() => {
+    api.getInitialCards()
+    .then(res => {
+      setCards(res)
+    })
+  }, [])
 
 
   return (
@@ -41,7 +40,13 @@ function Main(props) {
         <button className="profile__button" onClick={props.onAddPlace} type="button"></button>
       </section>
 
-      <section className="elements"></section>
+      <section className="elements">
+        {cards.map((card) => {
+          return (
+            <Card card={card} key={card._id}/>
+          )
+        })}
+      </section>
     </main>
   );
 }
