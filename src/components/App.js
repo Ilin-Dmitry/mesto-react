@@ -14,6 +14,8 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
 
+  const [selectedCard, setSelectedCard] = React.useState(false)
+
 
   function handleEditProfileClick () {
     setIsEditProfilePopupOpen(true);
@@ -26,6 +28,10 @@ function App() {
     setIsAddPlacePopupOpen(true);
   };
 
+  function handleCardClick (clickedCard) {
+    setSelectedCard(clickedCard)
+  }
+
   // function handleEditProfileClick () {
   //   console.log('hi');
   //   const popupProfile = document.querySelector('.popup_sec_profile');
@@ -36,6 +42,7 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
     setIsAddPlacePopupOpen(false);
+    setSelectedCard(false);
   }
 
   return (
@@ -44,7 +51,7 @@ function App() {
         <div className="page__container">
 
           <Header />
-          <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick}/>
+          <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick}/>
           <Footer />
 
           <PopupWithForm name="profile" title="Редактировать профиль" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
@@ -68,6 +75,9 @@ function App() {
           </PopupWithForm>
 
           <PopupWithForm name="RemoveConfirm" title="Вы уверены?" />
+
+          {selectedCard && <ImagePopup card={selectedCard} onClose={closeAllPopups}/>}
+
 
           {/* <section className="popup popup_sec_profile">
             <div className="popup__container">
