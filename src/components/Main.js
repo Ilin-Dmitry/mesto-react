@@ -2,7 +2,6 @@ import React from 'react';
 import api from '../utils/Api';
 import Card from './Card';
 
-
 function Main(props) {
 
   const [userName, setUserName] = React.useState('Jacques-Yves Cousteau');
@@ -26,7 +25,6 @@ function Main(props) {
       setCards(res)
     })
   }, [])
-
 
   return (
     <main>
