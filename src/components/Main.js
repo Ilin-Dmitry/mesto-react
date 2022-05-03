@@ -1,16 +1,16 @@
-import React from 'react';
+import {useState, useEffect} from 'react';
 import api from '../utils/Api';
 import Card from './Card';
 
 function Main(props) {
 
-  const [userName, setUserName] = React.useState('Jacques-Yves Cousteau');
-  const [userDescription , setUserDescription ] = React.useState('ocean researcher');
-  const [userAvatar, setUserAvatar] = React.useState('https://pressanews.ru/wp-content/uploads/2015/07/Kem-byl-ZHak-Iv-Kusto-i-chem-on-byl-tak-znamenit.jpg');
+  const [userName, setUserName] = useState('Jacques-Yves Cousteau');
+  const [userDescription , setUserDescription ] = useState('ocean researcher');
+  const [userAvatar, setUserAvatar] = useState('https://pressanews.ru/wp-content/uploads/2015/07/Kem-byl-ZHak-Iv-Kusto-i-chem-on-byl-tak-znamenit.jpg');
 
-  const [cards, setCards] = React.useState([]);
+  const [cards, setCards] = useState([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     api.getProfile()
     .then(res => {
       setUserName(res.name)
@@ -19,7 +19,7 @@ function Main(props) {
     })
   }, [])
 
-  React.useEffect(() => {
+  useEffect(() => {
     api.getInitialCards()
     .then(res => {
       setCards(res)
