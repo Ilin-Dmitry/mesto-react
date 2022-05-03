@@ -14,7 +14,7 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
 
-  const [selectedCard, setSelectedCard] = React.useState(false)
+  const [selectedCard, setSelectedCard] = React.useState({});
 
 
   function handleEditProfileClick () {
@@ -38,7 +38,7 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
     setIsAddPlacePopupOpen(false);
-    setSelectedCard(false);
+    setSelectedCard({});
   }
 
   return (
@@ -71,7 +71,7 @@ function App() {
 
         <PopupWithForm name="removeConfirm" title="Вы уверены?" />
 
-        {selectedCard && <ImagePopup card={selectedCard} onClose={closeAllPopups}/>}
+        <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
 
       </div>
     </div>
