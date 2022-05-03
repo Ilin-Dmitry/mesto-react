@@ -10,6 +10,7 @@ function Main(props) {
 
   const [cards, setCards] = useState([]);
 
+
   useEffect(() => {
     api.getProfile()
     .then(res => {
@@ -17,9 +18,7 @@ function Main(props) {
       setUserDescription(res.about)
       setUserAvatar(res.avatar)
     })
-  }, [])
 
-  useEffect(() => {
     api.getInitialCards()
     .then(res => {
       setCards(res)

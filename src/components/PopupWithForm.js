@@ -1,6 +1,6 @@
 function PopupWithForm (props) {
     return (
-        <section className={`popup popup_sec_${props.name} ${props.isOpen ? 'popup_opened' : ''}`}>
+        <section className={`popup  ${props.isOpen && 'popup_opened'}`}>
             <div className="popup__container">
                 <form className={`popup__form_sec_${props.name}`} method="post" name={`form${props.name}`} noValidate>
                     <h2 className="popup__heading">{props.title}</h2>
