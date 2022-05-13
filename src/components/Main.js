@@ -1,23 +1,14 @@
-import {useState, useEffect, useContext} from 'react';
-import api from '../utils/Api';
+import {useContext} from 'react';
 import Card from './Card';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import { CardsContext } from '../contexts/CardsContext';
 
 function Main(props) {
 
   const user = useContext(CurrentUserContext);
   const {name, about, avatar} = user;
+  const cards = useContext(CardsContext);
 
-
-  const [cards, setCards] = useState([]);
-
-
-  useEffect(() => {
-    api.getInitialCards()
-    .then(res => {
-      setCards(res)
-    })
-  }, [])
 
   return (
     <main>
