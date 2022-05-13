@@ -1,9 +1,11 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
+import api from '../utils/Api';
+import {CurrentUserContext} from '../contexts/CurrentUserContext'
 
 function App() {
 
@@ -12,17 +14,17 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
 
+  const [currentUser, setCurrentUser] = useState({})
+
   function handleEditProfileClick () {
     setIsEditProfilePopupOpen(true);
   };
-
   function handleEditAvatarClick () {
     setIsEditAvatarPopupOpen(true);
   };
   function handleAddPlaceClick () {
     setIsAddPlacePopupOpen(true);
   };
-
   function handleCardClick (clickedCard) {
     setSelectedCard(clickedCard)
   }
@@ -34,8 +36,16 @@ function App() {
     setSelectedCard({});
   }
 
+  useEffect (() => {
+    api.getProfile()
+    .then(res => {
+      setCurrentUser(res)
+    })
+  }, [])
+
   return (
-    <div className="page">
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="page">
       <div className="page__container">
 
         <Header />
@@ -68,6 +78,7 @@ function App() {
 
       </div>
     </div>
+    </CurrentUserContext.Provider>
   );
 }
 
