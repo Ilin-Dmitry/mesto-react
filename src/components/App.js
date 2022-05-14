@@ -7,6 +7,7 @@ import ImagePopup from './ImagePopup';
 import api from '../utils/Api';
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
 import {CardsContext} from '../contexts/CardsContext';
+import EditProfilePopup from './EditProfilePopup';
 
 function App() {
 
@@ -53,6 +54,16 @@ function App() {
     })
   }, [])
 
+  function handleUpdateUser({name, about}) {
+    api.editProfile(name, about)
+      .then(res => {
+        setCurrentUser(res)
+      })
+      .finally(
+        closeAllPopups()
+      )
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <CardsContext.Provider value={cards}>
@@ -60,16 +71,10 @@ function App() {
           <div className="page__container">
 
             <Header />
-            <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} onSetCards={handleSetCards}/>
+            <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} onSetCards={handleSetCards} />
             <Footer />
 
-            <PopupWithForm name="profile" title="Редактировать профиль" submitBtnText="Сохранить" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
-              <input className="popup__input popup__input_set_name" type="text" name="name" defaultValue="Жак-Ив Кусто" placeholder="Введите имя" minLength="2" maxLength="40" required />
-              <span className="popup__error name-error"></span>
-              <input className="popup__input popup__input_set_status" type="text" name="status"
-                defaultValue="Исследователь океана" placeholder="Введите статус" minLength="2" maxLength="200" required />
-              <span className="popup__error status-error"></span>
-            </PopupWithForm>
+            <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}></EditProfilePopup>
 
             <PopupWithForm name="newPlace" title="Новое место" submitBtnText="Создать" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
               <input className="popup__input popup__input_set_place" type="text" name="place" defaultValue="" placeholder="Название" minLength="2" maxLength="30" required />
