@@ -10,17 +10,13 @@ function Main(props) {
   const {name, about, avatar} = currentUser;
   const cards = useContext(CardsContext);
 
-  console.log('props of main', props)
-
   function handleCardLike (card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
-    console.log('card =>', card)
-    api.addLike(card._id)
+    api.changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
         props.onSetCards((state) => state.map((c) => c._id === card._id ? newCard : c))
       });
   }
-
 
   return (
     <main>
