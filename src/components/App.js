@@ -31,6 +31,10 @@ function App() {
     setSelectedCard(clickedCard)
   }
 
+  function handleSetCards (cards) {
+    setCards(cards)
+  }
+
   function closeAllPopups() {
     setIsEditProfilePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
@@ -56,7 +60,7 @@ function App() {
           <div className="page__container">
 
             <Header />
-            <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick}/>
+            <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} onSetCards={handleSetCards}/>
             <Footer />
 
             <PopupWithForm name="profile" title="Редактировать профиль" submitBtnText="Сохранить" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>

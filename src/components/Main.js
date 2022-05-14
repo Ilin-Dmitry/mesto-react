@@ -2,12 +2,24 @@ import {useContext} from 'react';
 import Card from './Card';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { CardsContext } from '../contexts/CardsContext';
+import api from '../utils/Api';
 
 function Main(props) {
 
-  const user = useContext(CurrentUserContext);
-  const {name, about, avatar} = user;
+  const currentUser = useContext(CurrentUserContext);
+  const {name, about, avatar} = currentUser;
   const cards = useContext(CardsContext);
+
+  console.log('props of main', props)
+
+  function handleCardLike (card) {
+    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    console.log('card =>', card)
+    api.addLike(card._id)
+      .then((newCard) => {
+        props.onSetCards((state) => state.map((c) => c._id === card._id ? newCard : c))
+      });
+  }
 
 
   return (
@@ -25,7 +37,7 @@ function Main(props) {
       <section className="elements">
         {cards.map((card) => {
           return (
-            <Card card={card} key={card._id} onCardClick={props.onCardClick}/>
+            <Card card={card} key={card._id} onCardClick={props.onCardClick} onCardLike={handleCardLike}/>
           )
         })}
       </section>
