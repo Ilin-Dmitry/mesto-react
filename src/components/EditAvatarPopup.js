@@ -3,12 +3,13 @@ import {useRef} from 'react';
 
 function EditAvatarPopup ({isOpen, onClose, onUpdateAvatar}) {
   const avatarInputRef = useRef();
-
   function handleSubmit(e) {
     e.preventDefault();
     onUpdateAvatar({
       avatar: avatarInputRef.current.value
     })
+    //обнуляем инпут
+    avatarInputRef.current.value = ''
   }
 
   return (
