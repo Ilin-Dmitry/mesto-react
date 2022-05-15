@@ -76,6 +76,21 @@ function App() {
 
   }
 
+  function handleCardLike (card) {
+    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    api.changeLikeCardStatus(card._id, !isLiked)
+      .then((newCard) => {
+        setCards((state) => state.map((c) => c._id === card._id ? newCard : c))
+      });
+  }
+
+  function handleCardDelete(card) {
+    api.deleteCard(card._id)
+      .then((res) => {
+        setCards((state) => state.filter((c) => c._id !== card._id))
+      })
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <CardsContext.Provider value={cards}>
@@ -83,7 +98,7 @@ function App() {
           <div className="page__container">
 
             <Header />
-            <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} onSetCards={handleSetCards} />
+            <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} onSetCards={handleSetCards} cards={cards} onCardLike={handleCardLike} onCardDelete={handleCardDelete}/>
             <Footer />
 
             <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}></EditProfilePopup>
@@ -96,8 +111,6 @@ function App() {
               <input className="popup__input popup__input_set_link" type="url" name="link" defaultValue="" placeholder="Ссылка на картинку" required />
               <span className="popup__error link-error"></span>
             </PopupWithForm>
-
-
 
             <PopupWithForm name="removeConfirm" title="Вы уверены?" />
 
