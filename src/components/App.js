@@ -80,7 +80,7 @@ function App() {
   }
   function handleCardDelete(card) {
     api.deleteCard(card._id)
-      .then((res) => {
+      .then(() => {
         setCards((state) => state.filter((c) => c._id !== card._id))
       })
   }
