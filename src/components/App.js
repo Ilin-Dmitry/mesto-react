@@ -6,7 +6,6 @@ import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import api from '../utils/Api';
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
-import {CardsContext} from '../contexts/CardsContext';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
@@ -139,7 +138,6 @@ function App() {
 
         </div>
       </div>
-
 
     </CurrentUserContext.Provider>
   );
