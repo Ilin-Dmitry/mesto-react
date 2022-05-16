@@ -47,9 +47,15 @@ function App() {
     .then(res => {
       setCurrentUser(res)
     })
+    .catch(error => {
+      console.log(`Ошибка ${error}`)
+    })
     api.getInitialCards()
     .then(res => {
       setCards(res);
+    })
+    .catch(error => {
+      console.log(`Ошибка ${error}`)
     })
   }, [])
   function handleUpdateUser({name, about}) {
@@ -57,18 +63,25 @@ function App() {
       .then(res => {
         setCurrentUser(res)
       })
-      .finally(
-        closeAllPopups()
+      .then(() =>
+        {closeAllPopups()}
       )
+      .catch(error => {
+        console.log(`Ошибка ${error}`)
+      })
+
   }
   function handleUpdateAvatar ({avatar}) {
     api.setAvatar(avatar)
       .then((res) => {
         setCurrentUser(res)
       })
-      .finally(
-        closeAllPopups()
+      .then(() =>
+        {closeAllPopups()}
       )
+      .catch(error => {
+        console.log(`Ошибка ${error}`)
+      })
 
   }
   function handleCardLike (card) {
@@ -76,12 +89,18 @@ function App() {
     api.changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c))
-      });
+      })
+      .catch(error => {
+        console.log(`Ошибка ${error}`)
+      })
   }
   function handleCardDelete(card) {
     api.deleteCard(card._id)
       .then(() => {
         setCards((state) => state.filter((c) => c._id !== card._id))
+      })
+      .catch(error => {
+        console.log(`Ошибка ${error}`)
       })
   }
   function handleAddPlaceSubmit({name, link}) {
@@ -89,34 +108,38 @@ function App() {
       .then(res => {
         setCards([res, ...cards])
       })
-      .finally(
-        closeAllPopups()
+      .then(() =>
+        {console.log('Закрываю')
+        closeAllPopups()}
       )
+      .catch(error => {
+        console.log(`Ошибка ${error}`)
+      })
   }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <CardsContext.Provider value={cards}>
-        <div className="page">
-          <div className="page__container">
 
-            <Header />
-            <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} onSetCards={handleSetCards} cards={cards} onCardLike={handleCardLike} onCardDelete={handleCardDelete}/>
-            <Footer />
+      <div className="page">
+        <div className="page__container">
 
-            <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}></EditProfilePopup>
+          <Header />
+          <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} onSetCards={handleSetCards} cards={cards} onCardLike={handleCardLike} onCardDelete={handleCardDelete}/>
+          <Footer />
 
-            <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}></EditAvatarPopup>
+          <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}></EditProfilePopup>
 
-            <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit}></AddPlacePopup>
+          <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}></EditAvatarPopup>
 
-            <PopupWithForm name="removeConfirm" title="Вы уверены?" />
+          <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit}></AddPlacePopup>
 
-            <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
+          <PopupWithForm name="removeConfirm" title="Вы уверены?" />
 
-          </div>
+          <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
+
         </div>
-      </CardsContext.Provider>
+      </div>
+
 
     </CurrentUserContext.Provider>
   );
